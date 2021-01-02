@@ -1,28 +1,28 @@
 const routes = [
   {
-    index: true,
-    label: "Michael D'Angelo",
     path: '/',
+    label: 'Katrina Delos Reyes',
+    index: true,
   },
   {
-    label: 'About',
     path: '/about',
+    label: 'About',
   },
   {
-    label: 'Resume',
     path: '/resume',
+    label: 'Resume',
   },
+  // {
+  //   path: '/endeavors',
+  //   label: 'Endeavors',
+  // },
+  // {
+  //   path: '/blog',
+  //   label: 'Blog',
+  // },
   {
-    label: 'Projects',
-    path: '/projects',
-  },
-  {
-    label: 'Stats',
-    path: '/stats',
-  },
-  {
-    label: 'Contact',
     path: '/contact',
+    label: 'Contact',
   },
 ];
 

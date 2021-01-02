@@ -1,91 +1,58 @@
 
-# Intro
+#### Intro
+I am the Founder and Technical Directory of [&TECH](https://www.andtechnology.org), a project-based & team-based experience for high schoolers to explore their passions & tech. My background is in computer science and math, which led me to my day job of a technology strategist focusing on Agile and DevSecOps and a major defense contractor. A huge part of my job is also getting to mentor college students in cybersecurity and general careers. When I'm not doing either of these things, you can find me on a hiking trail, baking "healthy" cookies, in a dance studio, or amateurly playing the drums.
+<br><br>
+#### Currently
+At [&TECH](https://www.andtechnology.org), I spent 2020 putting together an amazing team of high school interns, strategic advisors, engineers, and more, who also happen to be great friends. We are setting out to host Frederick, MD's very first high school-focused hackathon, Hack&TECH, in summer of 2021. I am currently putting together tech-related resources for the community to have access to, working with my team on communications and ideation for the future, and planning and prototyping &TECH Challenges for three interdisciplinary tracks: art&TECH, sports&TECH, and music&TECH. Check out our work at www.andtechnology.org!
+<br><br>
+At my day job, I am working Digital Transformation for a major defense contractor. After spending time doing software development and cybersecurity, I took a leap of faith to be on the cutting edge of good and innovative change for the company. This past year, I've learned a ton about and applied a ton of [DevSecOps](https://www.alldaydevops.com/), Lean-Agile, Model-based Engineering, web development, [Dojos](https://dojoconsortium.org/), and so much more. Even amidst the new virtual environment, I was fortunate enough to be able to continue serving as a mentor for the [UMD ACES CyberConnect Program](https://aces.umd.edu/cyberconnect) and mentored the 2020 winning team of [UMBC's annual CyPi Competition](https://my3.my.umbc.edu/groups/issa/posts/94169).
+<br><br>
+Last but not least, I am a dance teacher at [BJCDA](https://www.bjcda.com/), where I have danced since I was five years old. I teach and choreograph jazz and ballet dances for several awesome classes, and take my own tap, ballet, jazz, and lyrical classes, which I obviously have yet to grow tired of. We are looking forward to our 61st BJCDA Dance Recital, coming up in summer of 2021!
+<br><br>
+#### Some history
 
-I am a co-founder and the CTO of [Arthena](https://arthena.com) where I work on engineering infrastructure and build tools to price fine art. My primary job functions are as a data scientist and software engineer.
+- In 1998, I was born in the wonderful tropics of the Philippines.
 
-I am available to consult on interesting projects. I am particularly interested in social impact, education, inclusivity, and space. I enjoy advising companies and may even be available for pro-bono work depending on the time commitment and the project. If you would like to arrange a meeting, I am based in New York but travel to the San Francisco Bay Area frequently.
+- In 2000, my parents and I immigrated to the United States for a brighter future.
 
-# Currently
+- In 2012, I took my first programming class (because my parents told me to) and surprisingly really enjoyed it. Go Java.
 
-At Arthena I have learned how to build teams and manage people, build relationships with customers, sell enterprise products, and build on-line predictive models for production environments. I've also learned how to build and maintain large web applications (see [arthena.com](https://arthena.com)).
+- In 2014, I was chosen to represent THS at the national [HOBY](https://www.hoby.org/) seminar, which gave me my first real sense of leadership.
 
-# Some history
+- In 2015, I suffered through seven AP classes which sucked at the time but paid off later!
 
-- My parents put a computer in my bedroom in 1993 when I was 3. It was an old Tandy that ran MS-DOS. My favorite games were Street Rod 2, Wolfenstein 3D, and Tom and Jerry. It had a mechanical keyboard and a turbo button. To this day, I still don't know what pressing the turbo button really did.
+- In 2016, I graduated high school and started my first year at the University of Maryland, where I was admitted into the [ACES Program](https://aces.umd.edu/)
 
-- We subscribed to AOL in 1995. I still remember installing it from a floppy disk onto our brand new Packard Bell. It took years for me to send my first email.
+- In 2017, I took some really cool algorithm courses, served as a leader in UMD's Student Government Association, and went skiing for the first time.
 
-- In the summer of 1996, my uncle purchased [MegaRace](https://en.wikipedia.org/wiki/MegaRace) from [Media Play](https://en.wikipedia.org/wiki/Media_Play) and installed it on my mom's work computer. I might have endangered her business by using her computer too much.
+- In 2018, I started &TECH in my college apartment (channeling my start up vibes here), after realizing how much I could do and help others with creating opportunities for themselves in tech. Namely kids like my cousins in the Philippines, who are incredibly smart and just need an outlet to apply.
 
-- At 7, I discovered the mini-games hidden in Microsoft Office. I also beat Minesweeper on expert for the first time.
+- In 2019, I graduated with a B.S. in Computer Science and Math, got awarded [best undergrad TA](https://twitter.com/umdcs/status/1150774946521632768?lang=en) by the UMD Department of Computer Science, traveled to the Philippines, started my big girl full-time job, and turned &TECH into an official LLC.
 
-- At 8, my parents bought me a Sony Mavica MVC-FD71 digital camera after I stole their SLR one too many times. It could fit 10 images to a floppy disk at a 0.3MP resolution. I still have it and it still works. I've been taking photographs ever since, now with a Nikon D750, D800, and occasionally with a Mamiya 6II.
+- In 2020, I pivoted to technology strategy, adjusted to the #wfhlife, and hiked a lot. Oh, and I put together an [amazing &TECH team](https://www.andtechnology.org/our-team.html)!
+<br><br>
+#### I like
+- Dancing (tap and ballet are my favs)
+- Snow
+- Hiking (Raven Rocks is currently my fav)
+- Baking
+- Working out
+- Books
+- Grey's Anatomy
+- r/AskReddit
+- Denver Nuggets (only cause they remind me of chicken nuggets)
 
-- At 10, I built my first website with Microsoft FrontPage on our Pentium III [Gateway](https://en.wikipedia.org/wiki/Gateway,_Inc.). My website was terrible.
+#### Fun facts
 
-- I was 11 when I built my first [Tesla Coil](https://en.wikipedia.org/wiki/Tesla_coil) (without the permission of my parents). Over the next few years, I built several more including one of the first audio modulated coils and one of the first DRSSTCs.
+- I have a notebook of nearly a hundred ideas, like Go Go Grocery or MindBar.
+- I played the drums at open band night at Cafe Nola after playing for only 2 months. Lol.
+- I religiously try to improve my chocolate chip cookie recipes by making them healthier but still tasty.
+- I plan to open up a wedding planning business in 2042 under the alias Katrina Mae.
+- I was a guest on super cool podcast, Keys to the Future, hosted by a dear friend and mentor.
 
-- When I was 12, I set the all-time high record at my local laser tag facility by reverse engineering the charging station and weapon protocols with a photo-resistor, micro-cassette recorder, and a lot of patience. I was unstoppable.
+#### I dream of
 
-- At 13, I went to space camp and fell in love. I went back two more times and promised myself that I'd work in space. I've since helped build three generations of satellites and have tangentially worked on two more.
-
-- At 14, I was almost expelled for finding a backdoor into my high school's file server and telling everyone but the faculty members about it. Later that year, I figured out how to turn off the internet firewall by editing system registry keys. I anonymously shared my work months later.
-
-- At 16, I participated in a foreign exchange program in Dortmund, Germany. Since then, I've gone back almost every year.
-
-- 14 - 17, I played a lot of video games. My favorites included Counter Strike Source, Command and Conquer 3, Halo 2, and Age of Empires 3.
-
-- At 18, In the summer before college, my friends and I started playing [Muggle Quidditch](https://en.wikipedia.org/wiki/Quidditch_(sport)). We went on to start over 8 teams in the [International Quidditch Association](https://en.wikipedia.org/wiki/International_Quidditch_Association) including the [Buffalo Quidditch Society](https://www.facebook.com/buffaloquidditch/). At our height, we were ranked third in the IQA. Although I don't play anymore, you can still see pictures of me holding a broom while wearing a chess camp t-shirt on facebook.
-
-- At 19, I took my first graduate course and published my first academic paper.
-
-- At 20, I coauthored a grant to build a satellite and managed a 60+ person team through the end of undergrad. You can read more about that [here](https://ubnl.space/glados/).
-
-You can ask me in person for other stories that I'm afraid to share with the internet.
-
-# I like
-
-- Skiing
-- Sailing and the sea
-- Space
-- Summer
-- [Books](https://www.goodreads.com/mdangelo)
-- Colored pencils (Faber-Castell Polychromos)
-- Podcasts ([The Daily](https://www.nytimes.com/column/the-daily), [Planet Money](https://www.npr.org/sections/money/), [The Indicator](https://www.npr.org/podcasts/510325/the-indicator-from-planet-money), [99% Invisible](https://99percentinvisible.org/episodes/), [The Economist](http://radio.economist.com/), [Radiolab](https://www.wnycstudios.org/shows/radiolab), [Hidden Brain](https://www.npr.org/series/423302056/hidden-brain), [Inquiring Minds](https://inquiring.show), and others)
-- [Good design](/)
-- [Photography](https://instagram.com/dangelosaurus)
-
-# Travel / Geography
-
-- I am from originally from Buffalo, New York. I have since lived in
-Palo Alto, Mountain View, San Francisco, Seattle, and New York.
-
-- I've been to ~ 50 countries, some of which I have forgotten, and many of which I would like to revisit.
-
-- In 2016, I visited: Canada, Ethiopia, Austria, Germany, Belgium, Ireland, Northern Ireland, Italy, Romania, Sweden, Norway, Svalbard, Panama, Costa Rica, Uganda, Japan, and the UAE, mostly in that order.
-
-- In 2017, I visited: Canada, Japan, Denmark, Germany, Sweden, Estonia, Russia, the Netherlands, Belgium, the U.K., Spain, Iceland, France, Switzerland, Ethiopia, and Luxembourg.
-
-- In 2018, I visited: Canada, France, Italy, Israel, and the U.K.
-
-- In 2019, I visited: Canada, England, France, and Switzerland.
-
-- In 2020, I stayed in New York.
-
-- I am an Oregon Trail II enthusiast.
-
-# Fun facts
-
-- I have a list of thousands of ideas, like creating matching bow ties for cats and humans.
-- I almost always have a sketchbook with me.
-- I can't locate every country on a map.
-- I operate a [small angel fund](http://skepticalinvestments.biz/) with terrible returns.
-- I break about 30 traffic laws on a [skateboard](https://landyachtz.com/boards/cruiser/), [onewheel](https://onewheel.com/products/xr), [bicycle](https://www.citibikenyc.com/), or [electric skateboard](https://boostedusa.com/collections/electric-skateboards/products/boosted-mini-x) every single day.
-- I added this page because so many people complained that my site was just a resume.
-
-# I dream of
-
-- always finding inspiration.
-- enabling a brighter future.
-- doing better.
-- no one checking the commit history for earlier drafts of this file.
+- enabling opportunities for more people.
+- always finding cool ideas.
+- doing good.
+- opening up a dance studio with my younger sister one day.
