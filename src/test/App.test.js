@@ -19,7 +19,7 @@ import Resume from '../pages/Resume';
 const pages = [
   {
     route: '/',
-    heading: 'About this site',
+    heading: 'Welcome!',
     component: Index,
   },
   {
