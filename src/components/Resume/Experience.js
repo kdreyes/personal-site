@@ -12,7 +12,7 @@ const Experience = ({ data }) => (
     {data.map((job) => (
       <Job
         data={job}
-        key={job.company}
+        key={job.position}
       />
     ))}
   </div>
