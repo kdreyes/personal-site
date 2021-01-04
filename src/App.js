@@ -12,7 +12,7 @@ const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Index = lazy(() => import('./pages/Index'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-// const Endeavors = lazy(() => import('./pages/Endeavors'));
+const Endeavors = lazy(() => import('./pages/Endeavors'));
 const Resume = lazy(() => import('./pages/Resume'));
 // const Stats = lazy(() => import('./pages/Stats'));
 const Blog = lazy(() => import('./pages/Blog'));
@@ -23,8 +23,8 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Index} />
         <Route path="/about" component={About} />
-        {/* <Route path="/endeavors" component={Endeavors} />
-        <Route path="/stats" component={Stats} /> */}
+        <Route path="/endeavors" component={Endeavors} />
+        {/* <Route path="/stats" component={Stats} /> */}
         <Route path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} />
         <Route path="/resume" component={Resume} />

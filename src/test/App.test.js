@@ -12,7 +12,8 @@ import About from '../pages/About';
 import Contact from '../pages/Contact';
 import Index from '../pages/Index';
 import NotFound from '../pages/NotFound';
-// import Endeavors from '../pages/Endeavors';
+import Endeavors from '../pages/Endeavors';
+import Blog from '../pages/Blog';
 import Resume from '../pages/Resume';
 // import Stats from '../pages/Stats';
 
@@ -27,11 +28,16 @@ const pages = [
     heading: 'About Me',
     component: About,
   },
-  // {
-  //   route: '/endeavors',
-  //   heading: 'Endeavors',
-  //   component: Endeavors,
-  // },
+  {
+    route: '/endeavors',
+    heading: 'Endeavors',
+    component: Endeavors,
+  },
+  {
+    route: '/blog',
+    heading: 'Blog',
+    component: Blog,
+  },
   // {
   //   route: '/stats',
   //   heading: 'Stats',

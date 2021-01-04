@@ -19,8 +19,8 @@ const Index = () => (
       <p> Welcome to my website. Please feel free to read more <Link to="/about">about me</Link>,
         or you can check out my {' '}
         <Link to="/resume">resume</Link>, {' '}
-        {/* <Link to="/blog">blog posts</Link>, {' '}
-        <Link to="/endeavors">endeavors</Link>, {' '} */}
+        <Link to="/blog">blog posts</Link>, {' '}
+        <Link to="/endeavors">endeavors</Link>, {' '}
         or <Link to="/contact">contact</Link> me.
       </p>
       <p> Visit &amp;TECH <a href="https://www.andtechnology.org">here</a> while you&apos;re at it.</p>
