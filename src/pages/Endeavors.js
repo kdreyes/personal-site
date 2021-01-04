@@ -15,7 +15,9 @@ const Endeavors = () => (
       <header>
         <div className="title">
           <h2 data-testid="heading"><Link to="/projects">Endeavors</Link></h2>
-          <p>Some of my ongoing endeavors and engagements</p>
+          <p>Some of my ongoing and to-be-pursued endeavors and engagements.
+            Told you I have lots of ideas!
+          </p>
         </div>
       </header>
       {data.map((endeavor) => (
