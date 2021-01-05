@@ -7,6 +7,8 @@ import Main from '../layouts/Main';
 // import Cell from '../components/Endeavors/Cell';
 // import data from '../data/endeavors';
 
+import ShowBlog from '../components/Blog/ShowBlog';
+
 const Blog = () => (
   <Main
     title="Blog"
@@ -19,7 +21,8 @@ const Blog = () => (
           <p>All of my blog posts on Medium</p>
         </div>
       </header>
-      <p>Visit <a href="https://medium.com/@katrina.mdelosreyes">my Medium feed</a> here.</p>
+      <ShowBlog />
+      {/* <p>Visit <a href="https://medium.com/@katrina.mdelosreyes">my Medium feed</a> here.</p> */}
       {/* <div id="medium-widget">
         <Helmet>
           {
