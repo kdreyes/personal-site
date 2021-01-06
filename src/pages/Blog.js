@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import {Helmet} from 'react-helmet';
 
 import Main from '../layouts/Main';
 
-// import Cell from '../components/Endeavors/Cell';
-// import data from '../data/endeavors';
+import Cell from '../components/Endeavors/Cell';
+import data from '../data/blog';
 
 const Blog = () => (
   <Main
@@ -19,15 +18,12 @@ const Blog = () => (
           <p>All of my blog posts on Medium</p>
         </div>
       </header>
-      <p>Visit <a href="https://medium.com/@katrina.mdelosreyes">my Medium feed</a> here.</p>
-      {/* <div id="medium-widget">
-        <Helmet>
-          {
-          <script src="https://medium-widget.pixelpoint.io/widget.js"></script>
-          <script>MediumWidget.Init({renderTo: '#medium-widget', params: {"resource":"https://medium.com/@katrina.mdelosreyes","postsPerLine":2,"limit":4,"picture":"big","fields":["description","author","claps","publishAt"],"ratio":"landscape"}})</script>
-          }
-         </Helmet>
-      </div> */}
+      {data.map((blog) => (
+        <Cell
+          data={blog}
+          key={blog.title}
+        />
+      ))}
     </article>
   </Main>
 );
