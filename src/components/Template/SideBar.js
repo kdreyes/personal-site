@@ -21,9 +21,9 @@ const SideBar = () => (
       <h2>About</h2>
       <p>
         Hi, I&apos;m Katrina!
-        I&apos;m a technology strategist by day,
-        dance teacher by night, avid hiker by weekend,
-        and Founder and Director of &amp;TECH all other times.
+        I&apos;m always looking to push the status quo, make positive change,
+        and pursue adventure, whether that be through coding, creating, hiking,
+        dancing, or exploring new opportunities.
       </p>
       <ul className="actions">
         <li>

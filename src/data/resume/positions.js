@@ -1,8 +1,20 @@
 const positions = [{
   company: 'Northrop Grumman Corporation',
+  position: 'Systems Engineer: Space Sector',
+  link: 'https://northropgrumman.com',
+  daterange: 'February 2021 - Present',
+  points: [
+    'Designs and develops the digital architecture for a capability-centric Strategic Plan and incorporation with the program’s schedule authoritative source of truth utilizing Jira, automation through Python scripting, and Confluence to support over 50 teams with varying frameworks',
+    'Leads a six-person cross-functional team of software engineers, data analysts, and business analysts to develop and deliver program-wide technical metrics and data visualization to the customer, providing transparent data of progression utilizing hundreds of data points through Jira and Tableau',
+    'Develops and architects over 80 system-level capabilities based on customer requirements and reviewed through Cameo diagrams in order to baseline the technical functionality of a system',
+    'Leads technical review changes through Program Change Boards by developing baseline system-level capabilities and presenting at program-wide technical review boards for discussion and approval of over ten reviewers',
+    'Led a team of six interns by managing and tracking an average of 180 story points of work, supporting career development efforts, and serving as a Scrum Master to deliver team work on a Lean-Agile cadence',
+  ],
+}, {
+  company: 'Northrop Grumman Corporation',
   position: 'Agile/DevSecOps Strategist: Digital Transformation',
   link: 'https://northropgrumman.com',
-  daterange: 'March 2020 - Present',
+  daterange: 'March 2020 - February 2021',
   points: [
     'Lead DevSecOps (DSO) Pathfinders (on-contract programs and one capture) and metrics efforts by serving as the liaison between leadership and 40+ Pathfinder team members',
     'Pioneered the first Northrop Grumman Dojo 2.0 by leading and contributing to the creation of Dojo strategy, daily stand-ups, Dojo Coach on-boarding, Jira and Confluence',

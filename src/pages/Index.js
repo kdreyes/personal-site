@@ -23,7 +23,7 @@ const Index = () => (
         <Link to="/endeavors">endeavors</Link>, {' '}
         or <Link to="/contact">contact</Link> me.
       </p>
-      <p> Visit &amp;TECH <a href="https://www.andtechnology.org">here</a> while you&apos;re at it.</p>
+      <p> Visit &amp;TECH <a href="https://www.andtech.io">here</a> while you&apos;re at it.</p>
     </article>
   </Main>
 );
