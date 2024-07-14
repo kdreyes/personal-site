@@ -8,7 +8,7 @@
     "url": "https://github.com/kdreyes/personal-site.git"
   },
   "scripts": {
-    "build": "NODE_OPTIONS=--openssl-legacy-provider rimraf ./build && react-scripts build",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider rimraf ./build && react-scripts build",
     "predeploy": "npm run build && react-snap",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
@@ -40,6 +40,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
+    "cross-env": "^7.0.3",
     "eslint": "^7.16.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
