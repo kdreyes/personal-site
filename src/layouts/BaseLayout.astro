@@ -40,7 +40,12 @@ const {
 } = Astro.props;
 
 const fullTitle = title ? `${title} — ${SITE.name}` : `${SITE.name} — ${SITE.tagline}`;
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+// Static builds report paths like /about.html; canonical URLs use clean paths (/about).
+const path =
+  Astro.url.pathname
+    .replace(/(^|\/)index\.html$/, '$1')
+    .replace(/\.html$/, '')
+    .replace(/\/$/, '') || '/';
 const canonicalUrl = canonical ?? new URL(path, SITE.url).href;
 const imageUrl = new URL(image, SITE.url).href;
 const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
