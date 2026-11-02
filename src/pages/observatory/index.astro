@@ -1,0 +1,160 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getEntries, toWorkItem } from '~/lib/content';
+import { CATEGORIES, FUTURE_DOMAINS } from '~/lib/observatory';
+
+const studies = (await getEntries('observatory')).map((e) => ({ ...toWorkItem(e), domain: e.data.domain, state: e.data.status }));
+---
+
+<BaseLayout
+  title="The Observatory"
+  description="The Observatory tracks how AI capabilities turn into changes in behavior, work, organizations, institutions, and human experience, starting with software engineering."
+>
+  <div class="wrap">
+    <header class="page-head measure">
+      <p class="kicker">The Inner Intelligence Era</p>
+      <h1>The Observatory</h1>
+      <p class="lede">Tracking the transition from software outward.</p>
+    </header>
+
+    <div class="prose intro">
+      <p>
+        New AI capabilities are announced every week. It is much harder to see how those capabilities change what people do,
+        how work is organized, how institutions respond, and how people experience it. The Observatory collects
+        quantitative and qualitative evidence on those changes, one domain at a time.
+      </p>
+      <p>
+        It starts with software engineering. Software is one of the first fields where machine-produced work shows up at
+        scale, and it is the one I know best. Other domains will be added when there is enough evidence to say something
+        honest about them.
+      </p>
+    </div>
+
+    <section class="section" aria-labelledby="signals">
+      <div class="section-head">
+        <h2 id="signals">What the Observatory tracks</h2>
+      </div>
+      <ol class="cats" role="list">
+        {
+          CATEGORIES.map((c, i) => (
+            <li>
+              <span class="meta">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{c.name}</h3>
+              <p>{c.question}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="section" aria-labelledby="domains">
+      <div class="section-head">
+        <h2 id="domains">Domains</h2>
+      </div>
+      <ul class="studies" role="list">
+        {
+          studies.map((s) => (
+            <li>
+              <p class="meta">
+                {s.domain} · {s.state}
+              </p>
+              <h3>
+                <a href={s.href}>{s.title}</a>
+              </h3>
+              <p class="desc">{s.description}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="future sans">
+        <span class="kicker">Possible future domains</span>
+        {FUTURE_DOMAINS.join(' · ')}
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="method">
+      <div class="section-head">
+        <h2 id="method">Principles</h2>
+      </div>
+      <div class="prose">
+        <ul>
+          <li><strong>No invented data.</strong> Empty means empty. A signal is published only when there is public evidence behind it.</li>
+          <li><strong>Sources are always shown.</strong> Every signal links to where it came from, so an outsider could rebuild it.</li>
+          <li><strong>Confidence is stated.</strong> Signals carry a confidence level, and competing signals are shown together.</li>
+          <li><strong>History is kept.</strong> Revisions are dated and earlier readings stay available, so the record shows how understanding changed.</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-top: -0.5rem;
+  }
+
+  .cats {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+    gap: 0 2.5rem;
+  }
+
+  .cats li {
+    padding-block: 1.25rem 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .cats h3 {
+    font-size: var(--step-1);
+    margin-top: 0.3rem;
+  }
+
+  .cats p:last-child {
+    margin-top: 0.4rem;
+    color: var(--ink-2);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .studies {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .studies li {
+    padding-block: 0.25rem 1.75rem;
+  }
+
+  .studies h3 {
+    font-size: var(--step-2);
+    margin-top: 0.4rem;
+  }
+
+  .studies h3 a {
+    text-decoration: none;
+  }
+
+  .studies h3 a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+  }
+
+  .desc {
+    margin-top: 0.6rem;
+    color: var(--ink-2);
+    max-width: 40rem;
+  }
+
+  .future {
+    border-top: 1px solid var(--rule);
+    padding-top: 1rem;
+    font-size: 0.88rem;
+    color: var(--ink-2);
+    display: grid;
+    gap: 0.4rem;
+  }
+</style>

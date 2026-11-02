@@ -1,0 +1,250 @@
+---
+import type { MarkdownHeading } from 'astro';
+import BaseLayout from './BaseLayout.astro';
+import MetaLine from '~/components/MetaLine.astro';
+import Toc from '~/components/Toc.astro';
+import CopyLink from '~/components/CopyLink.astro';
+import ContinueReading from '~/components/ContinueReading.astro';
+import Subscribe from '~/components/Subscribe.astro';
+import { getRelated, sectionHref, type WorkItem } from '~/lib/content';
+import { articleLd } from '~/lib/jsonld';
+import { formatDate, isoDate } from '~/lib/format';
+import { SITE } from '~/site.config';
+
+interface Props {
+  item: WorkItem;
+  headings?: MarkdownHeading[];
+  /** Show a table of contents. Defaults to on for pieces of 8+ minutes. */
+  toc?: boolean;
+  canonical?: string;
+  prev?: WorkItem;
+  next?: WorkItem;
+  /** Section name shown above the title, e.g. "Essays". */
+  section: string;
+}
+
+const { item, headings = [], toc, canonical, prev, next, section } = Astro.props;
+const showToc = (toc ?? item.minutes >= 8) && headings.filter((h) => h.depth <= 3).length > 2;
+const related = await getRelated(item, 3);
+const image = `/og/${item.collection}/${item.slug}.png`;
+---
+
+<BaseLayout
+  title={item.title}
+  description={item.description}
+  image={image}
+  type="article"
+  published={item.date}
+  modified={item.updated}
+  topics={item.topics}
+  canonical={canonical}
+  jsonLd={articleLd(item, { image: new URL(image, SITE.url).href })}
+>
+  <article class="wrap article" class:list={{ 'has-toc': showToc }}>
+    <header class="head">
+      <p class="kicker crumb"><a href={sectionHref(item.collection)}>{section}</a></p>
+      <MetaLine item={item} />
+      <h1>{item.title}</h1>
+      {item.subtitle && <p class="deck">{item.subtitle}</p>}
+      <div class="byline sans">
+        <p>
+          By <a href="/about" rel="author">{SITE.name}</a>
+        </p>
+        <p class="dates">
+          <time datetime={isoDate(item.date)}>{formatDate(item.date)}</time>
+          {
+            item.updated && (
+              <>
+                {' '}
+                · Updated <time datetime={isoDate(item.updated)}>{formatDate(item.updated)}</time>
+              </>
+            )
+          }
+        </p>
+        <p class="no-print"><CopyLink /></p>
+      </div>
+      {item.topics.length > 0 && <p class="topics sans" aria-label="Topics">{item.topics.join(' · ')}</p>}
+    </header>
+
+    {
+      showToc && (
+        <aside class="toc-col">
+          <div class="toc-sticky">
+            <Toc headings={headings} />
+          </div>
+        </aside>
+      )
+    }
+
+    <div class="body">
+      <slot name="before" />
+      <div class="prose">
+        <slot />
+      </div>
+      <slot name="after" />
+
+      <p class="sign sans">
+        Written by <a href="/about" rel="author">{SITE.name}</a>, part of <a href="/">{SITE.investigation}</a>.
+      </p>
+
+      <ContinueReading items={related} />
+
+      <div class="sub">
+        <Subscribe />
+      </div>
+
+      {
+        (prev || next) && (
+          <nav class="pager sans" aria-label={`More ${section.toLowerCase()}`}>
+            {next ? (
+              <a href={next.href} rel="next">
+                <span class="meta">Newer</span>
+                <span>{next.title}</span>
+              </a>
+            ) : (
+              <span />
+            )}
+            {prev && (
+              <a href={prev.href} rel="prev" class="older">
+                <span class="meta">Older</span>
+                <span>{prev.title}</span>
+              </a>
+            )}
+          </nav>
+        )
+      }
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'head' 'toc' 'body';
+    padding-top: clamp(2.5rem, 2rem + 3vw, 5rem);
+  }
+
+  .head {
+    grid-area: head;
+    max-width: 50rem;
+    padding-bottom: 2.25rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .crumb a {
+    text-decoration: none;
+  }
+
+  .crumb {
+    margin-bottom: 1.25rem;
+  }
+
+  h1 {
+    font-size: var(--step-4);
+    margin-top: 0.75rem;
+    letter-spacing: -0.02em;
+    line-height: 1.06;
+  }
+
+  .deck {
+    margin-top: 1rem;
+    font-size: var(--step-1);
+    line-height: 1.45;
+    color: var(--ink-2);
+    font-style: italic;
+    max-width: 38em;
+  }
+
+  .byline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    align-items: baseline;
+    margin-top: 1.75rem;
+    font-size: 0.86rem;
+    color: var(--ink-2);
+  }
+
+  .byline a[rel='author'] {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .dates {
+    color: var(--ink-3);
+  }
+
+  .topics {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--ink-3);
+  }
+
+  .toc-col {
+    grid-area: toc;
+    margin-bottom: 2.5rem;
+  }
+
+  .body {
+    grid-area: body;
+    min-width: 0;
+  }
+
+  .sign {
+    max-width: var(--measure);
+    margin-top: 3.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.84rem;
+    color: var(--ink-3);
+  }
+
+  .sub {
+    margin-top: 4rem;
+  }
+
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 4rem;
+    max-width: var(--measure);
+    font-size: 0.95rem;
+  }
+
+  .pager a {
+    display: grid;
+    gap: 0.3rem;
+    text-decoration: none;
+  }
+
+  .pager a:hover span:last-child {
+    text-decoration: underline;
+  }
+
+  .pager .older {
+    text-align: right;
+  }
+
+  @media (min-width: 1100px) {
+    .article.has-toc {
+      grid-template-columns: minmax(0, var(--measure)) 15rem;
+      grid-template-areas: 'head head' 'body toc';
+      column-gap: clamp(4rem, 8vw, 8rem);
+      justify-content: start;
+    }
+
+    .has-toc .toc-col {
+      margin-bottom: 0;
+    }
+
+    .toc-sticky {
+      position: sticky;
+      top: 2rem;
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+    }
+  }
+</style>

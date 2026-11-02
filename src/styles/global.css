@@ -1,0 +1,491 @@
+/* ==========================================================================
+   Tokens
+   ========================================================================== */
+
+:root {
+  --paper: #fbfaf7;
+  --paper-2: #f3f1ea;
+  --ink: #1b1a17;
+  --ink-2: #45423b;
+  --ink-3: #6a665d;
+  --rule: #e2ddd2;
+  --rule-strong: #c9c3b5;
+  --accent: #1f4b74;
+  --accent-ink: #163a5b;
+  --accent-soft: #e6edf3;
+  --focus: #1f4b74;
+
+  --serif: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter Variable', Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --step--1: clamp(0.84rem, 0.82rem + 0.1vw, 0.9rem);
+  --step-0: clamp(1.06rem, 1rem + 0.3vw, 1.2rem);
+  --step-1: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --step-2: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --step-3: clamp(1.9rem, 1.5rem + 2vw, 2.9rem);
+  --step-4: clamp(2.3rem, 1.6rem + 3.6vw, 4.4rem);
+
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --page: 70rem;
+  --measure: 40rem;
+  --space-section: clamp(4rem, 3rem + 5vw, 7.5rem);
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #131311;
+    --paper-2: #1b1a18;
+    --ink: #ebe8e0;
+    --ink-2: #c4bfb4;
+    --ink-3: #9b968b;
+    --rule: #2b2925;
+    --rule-strong: #403d37;
+    --accent: #93b8de;
+    --accent-ink: #b6d0ea;
+    --accent-soft: #1b2531;
+    --focus: #93b8de;
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 1.5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 3rem 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a {
+    transition: text-decoration-color 0.15s ease, color 0.15s ease;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.5rem 0.9rem;
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  z-index: 10;
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Layout primitives
+   ========================================================================== */
+
+.wrap {
+  width: 100%;
+  max-width: calc(var(--page) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.measure {
+  max-width: var(--measure);
+}
+
+.section {
+  padding-block: var(--space-section) 0;
+}
+
+.rule-top {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.25rem;
+}
+
+/* Small uppercase label used for metadata and section kickers. */
+.kicker,
+.meta {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+
+.kicker {
+  color: var(--ink-2);
+}
+
+.sans {
+  font-family: var(--sans);
+}
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.arrow-link {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.arrow-link:hover {
+  color: var(--accent-ink);
+  text-decoration: underline;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--ink);
+  padding-top: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.section-head h2 {
+  font-size: var(--step-1);
+}
+
+.page-head {
+  padding-block: clamp(3rem, 2rem + 4vw, 5.5rem) clamp(2rem, 1.5rem + 2vw, 3.5rem);
+}
+
+.page-head h1 {
+  font-size: var(--step-3);
+  margin-block: 0.6rem 1rem;
+}
+
+/* ==========================================================================
+   Prose (long-form reading)
+   ========================================================================== */
+
+.prose {
+  max-width: var(--measure);
+  font-size: var(--step-0);
+  line-height: 1.68;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+.prose > * + * {
+  margin-top: 1.25em;
+}
+
+.prose h2 {
+  font-size: var(--step-2);
+  margin-top: 2.4em;
+  margin-bottom: -0.25em;
+}
+
+.prose h3 {
+  font-size: var(--step-1);
+  margin-top: 2em;
+  margin-bottom: -0.35em;
+}
+
+.prose h4 {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 2em;
+}
+
+.prose :is(h2, h3, h4) a {
+  text-decoration: none;
+}
+
+.prose a {
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.prose a:hover {
+  color: var(--accent);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.3em;
+}
+
+.prose li + li {
+  margin-top: 0.4em;
+}
+
+.prose li::marker {
+  color: var(--ink-3);
+}
+
+.prose blockquote {
+  margin-inline: 0;
+  padding-left: 1.2em;
+  border-left: 2px solid var(--rule-strong);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+.prose strong {
+  font-weight: 650;
+}
+
+.prose :not(pre) > code {
+  font-family: var(--mono);
+  font-size: 0.84em;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.08em 0.3em;
+}
+
+.prose pre {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow-x: auto;
+  hyphens: none;
+}
+
+/* Shiki dual themes */
+.astro-code,
+.astro-code span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
+}
+
+.prose table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  line-height: 1.45;
+  hyphens: none;
+}
+
+.prose th,
+.prose td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.55rem 1rem 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.prose th {
+  font-weight: 600;
+  border-bottom-color: var(--ink);
+}
+
+.prose figure {
+  margin-inline: 0;
+}
+
+.prose figcaption,
+.figure figcaption {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  color: var(--ink-3);
+  margin-top: 0.6rem;
+  line-height: 1.45;
+}
+
+.prose hr {
+  margin: 2.5em 0;
+}
+
+/* Footnotes (GFM) */
+.prose sup a,
+.prose a[data-footnote-ref] {
+  font-family: var(--sans);
+  font-size: 0.72em;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--accent);
+  padding-inline: 0.1em;
+}
+
+.prose :is(section.footnotes, section[data-footnotes]) {
+  margin-top: 4rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.prose :is(section.footnotes, section[data-footnotes]) h2 {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 1rem;
+}
+
+.prose :is(section.footnotes, section[data-footnotes]) a[data-footnote-backref] {
+  text-decoration: none;
+  font-family: var(--sans);
+}
+
+/* ==========================================================================
+   Print
+   ========================================================================== */
+
+@media print {
+  :root {
+    --paper: #fff;
+    --ink: #000;
+    --ink-2: #222;
+    --ink-3: #444;
+  }
+
+  body {
+    font-size: 11pt;
+  }
+
+  .site-header,
+  .site-footer,
+  .no-print,
+  .subscribe,
+  .toc,
+  .continue {
+    display: none !important;
+  }
+
+  .prose {
+    max-width: none;
+  }
+
+  .prose a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: #444;
+    word-break: break-all;
+  }
+
+  .prose pre,
+  .prose figure,
+  .prose table {
+    break-inside: avoid;
+  }
+
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-light) !important;
+    background-color: transparent !important;
+  }
+}

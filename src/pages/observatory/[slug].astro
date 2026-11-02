@@ -1,0 +1,49 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '~/layouts/ArticleLayout.astro';
+import { getEntries, toWorkItem } from '~/lib/content';
+import { mdxComponents } from '~/components/mdx';
+
+export async function getStaticPaths() {
+  const entries = await getEntries('observatory');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+---
+
+<ArticleLayout item={toWorkItem(entry)} headings={headings} section="Observatory" canonical={d.canonical_url}>
+  <dl class="facts sans" slot="before">
+    <div><dt>Domain</dt><dd>{d.domain}</dd></div>
+    <div><dt>Status</dt><dd>{d.status}</dd></div>
+    {d.categories.length > 0 && <div><dt>Signals tracked</dt><dd>{d.categories.join(' · ')}</dd></div>}
+    {d.methodology && <div><dt>Methodology</dt><dd>{d.methodology}</dd></div>}
+  </dl>
+  <Content components={mdxComponents} />
+</ArticleLayout>
+
+<style>
+  .facts {
+    max-width: var(--measure);
+    margin: 0 0 2.5rem;
+    display: grid;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .facts div {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 1rem;
+  }
+
+  dt {
+    color: var(--ink-3);
+  }
+
+  dd {
+    margin: 0;
+  }
+</style>

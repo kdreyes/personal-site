@@ -1,0 +1,106 @@
+---
+import type { WorkItem } from '~/lib/content';
+import { formatShortDate, isoDate } from '~/lib/format';
+import MetaLine from './MetaLine.astro';
+
+interface Props {
+  items: WorkItem[];
+  headingLevel?: 'h2' | 'h3';
+  compact?: boolean;
+}
+const { items, headingLevel = 'h3', compact = false } = Astro.props;
+const H = headingLevel;
+---
+
+<ol class:list={['work-list', { compact }]} role="list">
+  {
+    items.map((item) => (
+      <li>
+        <time class="date meta" datetime={isoDate(item.date)}>
+          {formatShortDate(item.date)}
+        </time>
+        <div class="body">
+          <MetaLine item={item} />
+          <H class="title">
+            <a href={item.href}>{item.title}</a>
+          </H>
+          {!compact && <p class="desc">{item.description}</p>}
+          {!compact && item.topics.length > 0 && (
+            <p class="topics sans">{item.topics.slice(0, 4).join(' · ')}</p>
+          )}
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .work-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 0.25rem 2rem;
+    padding-block: 1.6rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  li:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .date {
+    padding-top: 0.1rem;
+  }
+
+  .title {
+    font-size: var(--step-1);
+    margin-top: 0.3rem;
+    max-width: 40rem;
+  }
+
+  .title a {
+    text-decoration: none;
+  }
+
+  .title a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+  }
+
+  .desc {
+    margin-top: 0.5rem;
+    color: var(--ink-2);
+    max-width: 40rem;
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .topics {
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--ink-3);
+  }
+
+  .compact li {
+    padding-block: 1.1rem;
+  }
+
+  .compact .title {
+    font-size: 1.15rem;
+  }
+
+  @media (max-width: 640px) {
+    li {
+      grid-template-columns: 1fr;
+    }
+
+    .date {
+      order: 2;
+    }
+  }
+</style>

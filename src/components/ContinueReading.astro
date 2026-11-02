@@ -1,0 +1,28 @@
+---
+import type { WorkItem } from '~/lib/content';
+import WorkList from './WorkList.astro';
+
+interface Props {
+  items: WorkItem[];
+}
+const { items } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <section class="continue" aria-labelledby="continue-heading">
+      <h2 id="continue-heading" class="kicker">Continue the investigation</h2>
+      <WorkList items={items} />
+    </section>
+  )
+}
+
+<style>
+  .continue {
+    margin-top: 5rem;
+  }
+
+  h2 {
+    margin-bottom: 0.75rem;
+  }
+</style>

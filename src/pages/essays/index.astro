@@ -1,0 +1,50 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import WorkList from '~/components/WorkList.astro';
+import { getEntries, toWorkItem, groupByYear } from '~/lib/content';
+
+const items = (await getEntries('essays')).map(toWorkItem);
+const years = groupByYear(items);
+---
+
+<BaseLayout
+  title="Essays"
+  description="Long-form essays by Katrina Delos Reyes on AI, software engineering, verification, work, and human judgment."
+>
+  <div class="wrap">
+    <header class="page-head measure">
+      <p class="kicker">The Inner Intelligence Era</p>
+      <h1>Essays</h1>
+      <p class="lede">Long-form arguments and synthesis: researched, cited, and revised when the evidence changes.</p>
+    </header>
+
+    {
+      items.length === 0 ? (
+        <p class="empty sans">The first essay is in progress. <a href="/subscribe">Follow the investigation</a> to hear when it is published.</p>
+      ) : (
+        years.map(([year, list]) => (
+          <section class="year" aria-labelledby={`y${year}`}>
+            <h2 id={`y${year}`} class="kicker">{year}</h2>
+            <WorkList items={list} />
+          </section>
+        ))
+      )
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .year + .year {
+    margin-top: 3.5rem;
+  }
+
+  .year h2 {
+    margin-bottom: 0.75rem;
+  }
+
+  .empty {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.5rem;
+    color: var(--ink-2);
+  }
+</style>

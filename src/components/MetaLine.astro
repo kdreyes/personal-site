@@ -1,0 +1,22 @@
+---
+import type { WorkItem } from '~/lib/content';
+import { formatShortDate, isoDate } from '~/lib/format';
+
+interface Props {
+  item: WorkItem;
+  showDate?: boolean;
+  showSeries?: boolean;
+  class?: string;
+}
+const { item, showDate = false, showSeries = true, class: cls } = Astro.props;
+// Research and Observatory pages are living documents; reading time is less meaningful there.
+const showTime = item.collection === 'essays' || item.collection === 'notes';
+---
+
+<p class:list={['meta', cls]}>
+  <span>{item.typeLabel}</span>
+  {item.status && <span> · {item.status}</span>}
+  {showSeries && item.series && <span> · {item.series}</span>}
+  {showTime && <span> · {item.minutes} min</span>}
+  {showDate && <span> · <time datetime={isoDate(item.date)}>{formatShortDate(item.date)}</time></span>}
+</p>

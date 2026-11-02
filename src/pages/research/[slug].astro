@@ -1,0 +1,243 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '~/layouts/ArticleLayout.astro';
+import { getEntries, toWorkItem, findWork } from '~/lib/content';
+import { mdxComponents } from '~/components/mdx';
+import { formatDate, isoDate } from '~/lib/format';
+
+export async function getStaticPaths() {
+  const entries = await getEntries('research');
+  return entries.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, newer: entries[i - 1], older: entries[i + 1] },
+  }));
+}
+
+const { entry, newer, older } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+const relatedEssay = await findWork(d.related_essay);
+const updates = [...d.updates].sort((a, b) => b.date.valueOf() - a.date.valueOf());
+const STATUS_NOTE: Record<string, string> = {
+  Question: 'An open question. No claims yet.',
+  Researching: 'Reviewing evidence and designing methods. Nothing here is a finding yet.',
+  Experiment: 'Experiments are underway. Results are preliminary until published.',
+  Published: 'Results published. Updates are logged below.',
+  Ongoing: 'Long-running work, updated as new evidence arrives.',
+};
+---
+
+<ArticleLayout
+  item={toWorkItem(entry)}
+  headings={headings}
+  toc={d.toc}
+  canonical={d.canonical_url}
+  section="Research"
+  next={newer && toWorkItem(newer)}
+  prev={older && toWorkItem(older)}
+>
+  <section class="panel" slot="before" aria-label="Research summary">
+    <div class="status">
+      <span class="badge sans" data-status={d.status}>{d.status}</span>
+      <span class="sans note">{STATUS_NOTE[d.status]}</span>
+    </div>
+
+    <p class="kicker">Research question</p>
+    <p class="question">{d.research_question}</p>
+
+    <dl class="sans">
+      {
+        d.hypothesis && (
+          <div>
+            <dt>Working hypothesis</dt>
+            <dd>{d.hypothesis}</dd>
+          </div>
+        )
+      }
+      {
+        d.competing_hypotheses.length > 0 && (
+          <div>
+            <dt>Competing hypotheses</dt>
+            <dd>
+              <ul>
+                {d.competing_hypotheses.map((h) => (
+                  <li>{h}</li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        )
+      }
+      {
+        d.methodology_status && (
+          <div>
+            <dt>Methodology</dt>
+            <dd>{d.methodology_status}</dd>
+          </div>
+        )
+      }
+      <div>
+        <dt>Artifacts</dt>
+        <dd>
+          {d.data_url || d.code_url ? (
+            <ul class="inline">
+              {d.data_url && (
+                <li>
+                  <a href={d.data_url}>Data</a>
+                </li>
+              )}
+              {d.code_url && (
+                <li>
+                  <a href={d.code_url}>Code &amp; replication</a>
+                </li>
+              )}
+            </ul>
+          ) : (
+            <span class="muted">None published yet.</span>
+          )}
+        </dd>
+      </div>
+      {
+        relatedEssay && (
+          <div>
+            <dt>Related essay</dt>
+            <dd>
+              <a href={relatedEssay.href}>{relatedEssay.title}</a>
+            </dd>
+          </div>
+        )
+      }
+    </dl>
+  </section>
+
+  <Content components={mdxComponents} />
+
+  {
+    updates.length > 0 && (
+      <section class="updates" slot="after" aria-labelledby="updates-heading">
+        <h2 id="updates-heading" class="kicker">Revision log</h2>
+        <ol role="list">
+          {updates.map((u) => (
+            <li>
+              <time class="meta" datetime={isoDate(u.date)}>
+                {formatDate(u.date)}
+              </time>
+              <p>{u.note}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )
+  }
+</ArticleLayout>
+
+<style>
+  .panel {
+    max-width: var(--measure);
+    margin-bottom: 3rem;
+    padding: 0 0 1.75rem;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .status {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    padding: 0.15rem 0.45rem;
+  }
+
+  .note {
+    font-size: 0.84rem;
+    color: var(--ink-3);
+  }
+
+  .question {
+    font-size: var(--step-2);
+    line-height: 1.25;
+    font-weight: 500;
+    margin-top: 0.4rem;
+    text-wrap: balance;
+  }
+
+  dl {
+    margin: 1.75rem 0 0;
+    display: grid;
+    gap: 1rem;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  dl div {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  dt {
+    color: var(--ink-3);
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  dd ul {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  dd li + li {
+    margin-top: 0.3rem;
+  }
+
+  .inline {
+    list-style: none;
+    padding: 0 !important;
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  .muted {
+    color: var(--ink-3);
+  }
+
+  .updates {
+    max-width: var(--measure);
+    margin-top: 3.5rem;
+  }
+
+  .updates ol {
+    list-style: none;
+    margin: 0.75rem 0 0;
+    padding: 0;
+  }
+
+  .updates li {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 1rem;
+    padding-block: 0.75rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 640px) {
+    dl div,
+    .updates li {
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+    }
+  }
+</style>

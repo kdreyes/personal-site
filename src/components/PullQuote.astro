@@ -1,0 +1,18 @@
+---
+/** Usage in MDX: <PullQuote>Sentence worth repeating.</PullQuote> (repeats body text, so hidden from screen readers) */
+---
+
+<aside class="pull-quote" aria-hidden="true"><slot /></aside>
+
+<style>
+  .pull-quote {
+    margin-block: 2.5em;
+    padding-block: 1.1rem;
+    border-block: 1px solid var(--ink);
+    font-size: var(--step-2);
+    line-height: 1.3;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Subscribe from '~/components/Subscribe.astro';
+---
+
+<BaseLayout
+  title="Subscribe"
+  description="Follow Katrina Delos Reyes's investigation into AI, software, and work: new essays, research, and occasional field notes by email or RSS."
+>
+  <div class="wrap">
+    <header class="page-head measure">
+      <p class="kicker">The Inner Intelligence Era</p>
+      <h1>Follow the investigation</h1>
+      <p class="lede">
+        New essays, research updates, and occasional field notes. There is no fixed schedule. I send something when there
+        is something worth sending.
+      </p>
+    </header>
+    <Subscribe id="page-subscribe" heading="By email" blurb="One address, nothing else. Unsubscribe anytime." />
+    <section class="rss measure">
+      <h2>By RSS</h2>
+      <p>Everything published here is also in the <a href="/rss.xml">RSS feed</a>.</p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .rss {
+    margin-top: 3rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 1.5rem;
+  }
+
+  .rss h2 {
+    font-size: var(--step-1);
+  }
+
+  .rss p {
+    margin-top: 0.5rem;
+    color: var(--ink-2);
+  }
+</style>

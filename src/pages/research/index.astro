@@ -1,0 +1,133 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getEntries, toWorkItem } from '~/lib/content';
+import { formatShortDate, isoDate } from '~/lib/format';
+
+const entries = await getEntries('research');
+---
+
+<BaseLayout
+  title="Research"
+  description="Original research by Katrina Delos Reyes on AI-generated software, verification, and software assurance, with questions, methods, data, and limitations shown openly."
+>
+  <div class="wrap">
+    <header class="page-head measure">
+      <p class="kicker">The Inner Intelligence Era</p>
+      <h1>Research</h1>
+      <p class="lede">
+        Original questions, experiments, datasets, and methods. Each project shows its status, hypotheses, competing
+        explanations, and limitations, including when there is no answer yet.
+      </p>
+    </header>
+
+    <ol class="projects" role="list">
+      {
+        entries.map((e) => {
+          const w = toWorkItem(e);
+          return (
+            <li>
+              <div class="side">
+                <span class="badge sans">{e.data.status}</span>
+                <time class="meta" datetime={isoDate(w.updated ?? w.date)}>
+                  {w.updated ? 'Updated ' : ''}
+                  {formatShortDate(w.updated ?? w.date)}
+                </time>
+              </div>
+              <div>
+                <h2>
+                  <a href={w.href}>{w.title}</a>
+                </h2>
+                <p class="q">
+                  <span class="kicker">Question</span> {e.data.research_question}
+                </p>
+                <p class="desc">{w.description}</p>
+              </div>
+            </li>
+          );
+        })
+      }
+    </ol>
+  </div>
+</BaseLayout>
+
+<style>
+  .projects {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 0.5rem 2rem;
+    padding-block: 2rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  li:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .side {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    justify-items: start;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    padding: 0.15rem 0.45rem;
+  }
+
+  h2 {
+    font-size: var(--step-2);
+    max-width: 22em;
+  }
+
+  h2 a {
+    text-decoration: none;
+  }
+
+  h2 a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+  }
+
+  .q {
+    margin-top: 0.8rem;
+    font-size: var(--step-1);
+    line-height: 1.4;
+    font-style: italic;
+    max-width: 36em;
+  }
+
+  .q .kicker {
+    font-style: normal;
+    margin-right: 0.4rem;
+  }
+
+  .desc {
+    margin-top: 0.7rem;
+    color: var(--ink-2);
+    max-width: 40rem;
+  }
+
+  @media (max-width: 640px) {
+    li {
+      grid-template-columns: 1fr;
+    }
+
+    .side {
+      grid-auto-flow: column;
+      align-items: baseline;
+    }
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+import { NEWSLETTER } from '~/site.config';
+
+interface Props {
+  heading?: string;
+  blurb?: string;
+  id?: string;
+}
+const {
+  heading = 'Follow the investigation',
+  blurb = 'New essays, research, and occasional field notes, sent by email when there is something worth sending.',
+  id = 'subscribe',
+} = Astro.props;
+const inputId = `${id}-email`;
+---
+
+<section class="subscribe" aria-labelledby={`${id}-heading`}>
+  <h2 id={`${id}-heading`}>{heading}</h2>
+  <p class="blurb">{blurb}</p>
+  <form action={NEWSLETTER.action} method="post" target="_blank" data-subscribe>
+    <label for={inputId} class="visually-hidden">Email address</label>
+    <input id={inputId} type="email" name={NEWSLETTER.emailField} required autocomplete="email" placeholder="you@example.com" />
+    {Object.entries(NEWSLETTER.hidden).map(([k, v]) => <input type="hidden" name={k} value={v} />)}
+    <button type="submit">Subscribe</button>
+  </form>
+  <p class="fine">No fixed schedule. Unsubscribe anytime. Or follow by <a href="/rss.xml">RSS</a>.</p>
+</section>
+
+<style>
+  .subscribe {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.5rem;
+    max-width: var(--measure);
+  }
+
+  h2 {
+    font-size: var(--step-1);
+  }
+
+  .blurb {
+    margin-top: 0.5rem;
+    color: var(--ink-2);
+    font-size: 1.02rem;
+  }
+
+  form {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.1rem;
+    flex-wrap: wrap;
+  }
+
+  input[type='email'] {
+    flex: 1 1 15rem;
+    min-width: 0;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    padding: 0.65rem 0.8rem;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--rule-strong);
+    border-radius: 3px;
+  }
+
+  input[type='email']::placeholder {
+    color: var(--ink-3);
+  }
+
+  button {
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding: 0.65rem 1.1rem;
+    color: var(--paper);
+    background: var(--ink);
+    border: 1px solid var(--ink);
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: var(--accent-ink);
+    border-color: var(--accent-ink);
+  }
+
+  .fine {
+    margin-top: 0.7rem;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    color: var(--ink-3);
+  }
+</style>

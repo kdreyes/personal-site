@@ -1,0 +1,58 @@
+---
+import type { MarkdownHeading } from 'astro';
+interface Props {
+  headings: MarkdownHeading[];
+}
+const items = Astro.props.headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{
+  items.length > 2 && (
+    <nav class="toc" aria-labelledby="toc-heading">
+      <p id="toc-heading" class="kicker">Contents</p>
+      <ol role="list">
+        {items.map((h) => (
+          <li class={`d${h.depth}`}>
+            <a href={`#${h.slug}`}>{h.text}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
+<style>
+  .toc {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .kicker {
+    margin-bottom: 0.75rem;
+  }
+
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 0.9rem;
+    border-left: 1px solid var(--rule);
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .d3 {
+    padding-left: 0.85rem;
+    font-size: 0.8rem;
+  }
+
+  a {
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+</style>

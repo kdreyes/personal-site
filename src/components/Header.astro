@@ -1,0 +1,110 @@
+---
+import { NAV, SITE, SOCIAL } from '~/site.config';
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
+---
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="name" href="/" aria-label={`${SITE.name}, home`}>{SITE.name}</a>
+    <nav aria-label="Primary">
+      <ul class="primary">
+        {
+          NAV.map((n) => (
+            <li>
+              <a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>
+                {n.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <ul class="secondary" aria-label="Elsewhere">
+      <li><a href={SOCIAL.github} rel="me">GitHub</a></li>
+      <li><a href={SOCIAL.linkedin} rel="me">LinkedIn</a></li>
+      <li><a href="/subscribe" class="subscribe-link" aria-current={isActive('/subscribe') ? 'page' : undefined}>Subscribe</a></li>
+    </ul>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .bar {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: 0.5rem 2.5rem;
+    padding-block: 1.15rem;
+  }
+
+  .name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.08rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.4rem;
+    font-family: var(--sans);
+  }
+
+  .primary {
+    font-size: 0.92rem;
+  }
+
+  .primary a,
+  .secondary a {
+    text-decoration: none;
+    color: var(--ink-2);
+    padding-block: 0.25rem;
+  }
+
+  .primary a:hover,
+  .secondary a:hover {
+    color: var(--ink);
+  }
+
+  .primary a[aria-current='page'] {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.45em;
+  }
+
+  .secondary {
+    font-size: 0.8rem;
+    gap: 0.35rem 1rem;
+  }
+
+  .secondary a {
+    color: var(--ink-3);
+  }
+
+  .subscribe-link {
+    color: var(--accent) !important;
+  }
+
+  @media (max-width: 860px) {
+    .bar {
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+    }
+
+    .secondary {
+      display: none;
+    }
+  }
+</style>

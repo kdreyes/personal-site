@@ -1,0 +1,29 @@
+---
+/** Usage in MDX: <Callout label="Limitation">Text…</Callout> */
+interface Props {
+  label?: string;
+}
+const { label = 'Note' } = Astro.props;
+---
+
+<aside class="callout">
+  <p class="kicker">{label}</p>
+  <div class="body"><slot /></div>
+</aside>
+
+<style>
+  .callout {
+    padding: 1rem 1.2rem;
+    background: var(--paper-2);
+    border-left: 2px solid var(--accent);
+    font-size: 0.98em;
+  }
+
+  .body {
+    margin-top: 0.35rem;
+  }
+
+  .body :global(* + *) {
+    margin-top: 0.8em;
+  }
+</style>

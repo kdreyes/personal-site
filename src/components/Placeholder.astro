@@ -1,0 +1,36 @@
+---
+/**
+ * A clearly labelled empty state for evidence that does not exist yet.
+ * Never put invented numbers inside one of these.
+ */
+interface Props {
+  label: string;
+  note?: string;
+}
+const {
+  label,
+  note = 'No data yet. This signal will be added when there is public evidence to support it.',
+} = Astro.props;
+---
+
+<div class="placeholder" role="note" aria-label={`${label}: no data yet`}>
+  <p class="kicker">{label}</p>
+  <p class="note">{note}</p>
+</div>
+
+<style>
+  .placeholder {
+    margin-block: 1.25rem;
+    padding: 1.1rem 1.25rem;
+    border: 1px dashed var(--rule-strong);
+    border-radius: 3px;
+  }
+
+  .note {
+    margin-top: 0.35rem;
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+</style>

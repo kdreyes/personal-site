@@ -1,0 +1,168 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Subscribe from '~/components/Subscribe.astro';
+import { personLd } from '~/lib/jsonld';
+import { SITE, SOCIAL, PROJECTS } from '~/site.config';
+---
+
+<BaseLayout
+  title="About"
+  type="profile"
+  description="Katrina Delos Reyes is an engineering leader, writer, and independent researcher studying how AI is changing software engineering and what follows for work, organizations, and people."
+  jsonLd={personLd()}
+>
+  <div class="wrap">
+    <header class="page-head measure">
+      <p class="kicker">About</p>
+      <h1>Katrina Delos Reyes</h1>
+      <p class="lede">
+        Engineering leader, builder, and independent writer and researcher. I study what AI is doing to software and
+        follow the consequences into organizations, work, education, economics, and institutions.
+      </p>
+    </header>
+
+    <div class="prose">
+      <p>
+        I’m an engineering leader working at the intersection of software, advanced development, and consequential
+        technology. Software engineering is my home base, and it is where I first watch new capabilities meet real
+        constraints: deadlines, correctness, safety, accountability, and the people responsible for all of them.
+      </p>
+
+      <h2 id="why-software">Why software first</h2>
+      <p>
+        Software is one of the first fields where AI-produced work is showing up at scale. Code can now be generated,
+        tested, reviewed, and explained by machines, often faster than people can check it. That makes software a useful
+        early warning system. Questions that will eventually matter everywhere show up here first: what counts as
+        evidence, who is accountable, how expertise forms, and what a team is for.
+      </p>
+
+      <h2 id="the-investigation">The investigation</h2>
+      <p>
+        I call the broader body of work <a href="/">{SITE.investigation}</a>: an ongoing investigation into AI, software,
+        work, and what happens to humans when intelligence becomes abundant. It takes four forms:{' '}
+        <a href="/essays">Essays</a> make long-form arguments. <a href="/research">Research</a> asks specific questions
+        and shows its methods. <a href="/observatory">The Observatory</a> tracks signals of change.{' '}
+        <a href="/notes">Field Notes</a> hold what isn’t settled yet.
+      </p>
+      <p>
+        I try to work in the open, with my uncertainty visible. When I have a hypothesis, I call it one. When the evidence
+        changes, the writing gets updated and dated.
+      </p>
+
+      <h2 id="principles">How I approach the work</h2>
+      <blockquote>
+        <p>My work gives me the questions. Public evidence gives me the material.</p>
+      </blockquote>
+      <p>
+        My professional experience shapes which questions seem important. It does not supply the evidence. Nothing here
+        discloses or relies on confidential employer information: no internal metrics, programs, customers, architectures,
+        or anecdotes, anonymized or not. Public arguments have to stand on public evidence.
+      </p>
+      <p>The test I hold myself to:</p>
+      <p class="test">
+        Could an intelligent outsider reconstruct the factual basis of this argument using the sources provided?
+      </p>
+      <p>Views here are my own and do not represent any employer.</p>
+
+      <h2 id="background">Background</h2>
+      <p>
+        I studied computer science and mathematics at the University of Maryland, College Park. Since then I’ve worked as a
+        software and systems engineer and moved into engineering leadership, mostly in environments where software has to
+        be right: DevSecOps, agile transformation, and advanced development for high-consequence systems.
+      </p>
+    </div>
+
+    <section class="section building" id="building" aria-labelledby="building-heading">
+      <h2 id="building-heading">I build things, too.</h2>
+      <p class="intro">Outside engineering and research, I build and run a few things in technology, community, and weddings.</p>
+      <dl>
+        {
+          PROJECTS.map((p) => (
+            <div>
+              <dt>{p.url ? <a href={p.url}>{p.name}</a> : p.name}</dt>
+              <dd>{p.description}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section class="section contact" id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Elsewhere</h2>
+      <ul class="sans">
+        <li><a href={SOCIAL.github} rel="me">GitHub</a></li>
+        <li><a href={SOCIAL.linkedin} rel="me">LinkedIn</a></li>
+        <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+        <li><a href="/rss.xml">RSS</a></li>
+      </ul>
+      <p class="fine sans">
+        For wedding planning and coordination, please contact{' '}
+        <a href="https://kmaeweddings.com">K. Mae Weddings</a>{' '}directly.
+      </p>
+    </section>
+
+    <section class="section">
+      <Subscribe id="about-subscribe" />
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .test {
+    font-style: italic;
+    padding-left: 1.2em;
+    border-left: 2px solid var(--accent);
+  }
+
+  .building,
+  .contact {
+    max-width: var(--measure);
+  }
+
+  .building h2,
+  .contact h2 {
+    font-size: var(--step-1);
+    border-top: 1px solid var(--rule);
+    padding-top: 1.25rem;
+  }
+
+  .intro {
+    margin-top: 0.5rem;
+    color: var(--ink-2);
+    font-size: 1.02rem;
+  }
+
+  dl {
+    margin: 1.25rem 0 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  dt {
+    font-weight: 600;
+    font-size: 1.02rem;
+  }
+
+  dd {
+    margin: 0.15rem 0 0;
+    color: var(--ink-2);
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .contact ul {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .fine {
+    margin-top: 1rem;
+    font-size: 0.84rem;
+    color: var(--ink-3);
+  }
+</style>

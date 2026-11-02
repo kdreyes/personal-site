@@ -1,0 +1,31 @@
+---
+/**
+ * Usage in MDX:
+ *   <Figure src="/images/chart.svg" alt="Describe what the figure shows." caption="Source: …" />
+ * or wrap custom content (tables, SVG, future interactive charts):
+ *   <Figure caption="…"> … </Figure>
+ */
+interface Props {
+  src?: string;
+  alt?: string;
+  caption?: string;
+}
+const { src, alt = '', caption } = Astro.props;
+---
+
+<figure class="figure">
+  {src ? <img src={src} alt={alt} loading="lazy" decoding="async" /> : <slot />}
+  {caption && <figcaption set:html={caption} />}
+</figure>
+
+<style>
+  .figure {
+    margin-inline: 0;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--rule);
+  }
+</style>

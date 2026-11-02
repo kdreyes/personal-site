@@ -1,44 +1,40 @@
-# [katrinadelosreyes.com](https://katrinadelosreyes.com/)
+# katrinadelosreyes.com
 
-My personal website. An [MIT](https://github.com/mldangelo/personal-site/blob/main/LICENSE) licensed, simple, easily modifiable, statically-exportable [React](https://reactjs.org/), [Jamstack](https://jamstack.org/) application that deploys automatically for free using [github pages](https://pages.github.com/). Built using modern javascript, based on [create-react-app](https://github.com/facebook/create-react-app) with [React-Router](https://reactrouter.com/), SCSS, [github actions](https://github.com/features/actions), and many other useful technologies.
+The personal site of Katrina Delos Reyes and the home of **The Inner Intelligence Era**, an ongoing investigation into AI, software, work, and what happens to humans when intelligence becomes abundant.
 
-## Contributing
+Built with [Astro](https://astro.build), Markdown/MDX content, and static output deployed on Vercel.
 
-Contributions are actively encouraged. Please review the [design goals](./docs/design-goals.md), [roadmap](./docs/roadmap.md), and [contributing guidelines](./docs/contributing.md). If you find a bug, please email me, submit a pull request (I'll buy you a coffee as a thank you), or submit an issue.
+## Develop
 
-## Dependencies
+Requires Node 22.23+ (see `.nvmrc`).
 
-Tested with: [node](https://nodejs.org/) >= v12 and optional [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) for managing node versions.
-
-## Set up
-
-To download the repository and install dependencies, run the following commands:
-
-```bash
-git clone git://github.com/kdreyes/personal-site.git # replace [kdreyes] with your github username if you fork first.
-cd personal-site
-nvm install # this is optional - make sure you're running >= node 12 with `node --version`
+```sh
 npm install
+npm run dev       # http://localhost:4321 (drafts visible)
+npm run build     # production build to dist/ (drafts excluded)
+npm run preview   # serve the production build
+npm run check     # type-check
 ```
 
-## Running
+## Publish
 
-Run the following command to build the react application and serve it with fast refresh:
+See [docs/publishing.md](docs/publishing.md). In short: add a Markdown/MDX file under `src/content/`, run the publication firewall checklist, set `draft: false` and `firewall_check: true`, and push.
 
-```bash
-npm start
+## Structure
+
+```
+src/
+  content/          essays, research, notes, observatory, archive
+  content.config.ts frontmatter schemas (the build fails on bad frontmatter)
+  site.config.ts    names, nav, social links, newsletter provider, projects
+  pages/            routes, RSS, robots.txt, social-preview images
+  layouts/          BaseLayout (head, nav, footer) and ArticleLayout
+  components/       small, mostly JS-free building blocks
+  lib/              content queries, structured data, formatting
+  styles/global.css design tokens, typography, prose, print
+vercel.json         legacy redirects (/resume, /blog, /contact, …)
 ```
 
-Your web browser should automatically open to `<ip>:<port>:<path>` default: [http://localhost:3000](http://localhost:3000).
+## License
 
-## Deploying
-
-### Deploying to Github Pages
-
-Modify the environmental variables and git remote url in [`.github/workflows/github-pages.yml`](.github/workflows/github-pages.yml).
-
-Make a commit to `main` and push your changes. That's it.
-
-## Acknowledgements
-
-* Template based on [Future Imperfect](https://html5up.net/future-imperfect) by [@ajlkn](https://github.com/ajlkn) for [HTML5 UP](html5up.net).
+Code: MIT (see `LICENSE`). Writing and research content © Katrina Delos Reyes, all rights reserved.

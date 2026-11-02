@@ -1,0 +1,29 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '~/layouts/ArticleLayout.astro';
+import { getEntries, toWorkItem } from '~/lib/content';
+import { mdxComponents } from '~/components/mdx';
+
+export async function getStaticPaths() {
+  const entries = await getEntries('essays');
+  return entries.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, newer: entries[i - 1], older: entries[i + 1] },
+  }));
+}
+
+const { entry, newer, older } = Astro.props;
+const { Content, headings } = await render(entry);
+---
+
+<ArticleLayout
+  item={toWorkItem(entry)}
+  headings={headings}
+  toc={entry.data.toc}
+  canonical={entry.data.canonical_url}
+  section="Essays"
+  next={newer && toWorkItem(newer)}
+  prev={older && toWorkItem(older)}
+>
+  <Content components={mdxComponents} />
+</ArticleLayout>

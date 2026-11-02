@@ -1,0 +1,30 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { NAV } from '~/site.config';
+---
+
+<BaseLayout title="Not found" description="This page could not be found." noindex>
+  <div class="wrap">
+    <header class="page-head measure">
+      <p class="kicker">404</p>
+      <h1>This page isn’t here.</h1>
+      <p class="lede">It may have moved when the site was reorganized. Try one of these:</p>
+    </header>
+    <ul class="sans" role="list">
+      <li><a href="/">Home</a></li>
+      {NAV.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+      <li><a href="/archive">Archive</a></li>
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+</style>

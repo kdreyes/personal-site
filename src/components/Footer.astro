@@ -1,0 +1,102 @@
+---
+import { SITE, SOCIAL, NAV } from '~/site.config';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap grid">
+    <div class="ident">
+      <p class="name"><a href="/about">{SITE.name}</a></p>
+      <p class="sub">{SITE.investigation}: {SITE.investigationDescriptor.replace(/^An ongoing/, 'an ongoing')}</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        {NAV.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+      </ul>
+      <ul>
+        <li><a href="/subscribe">Subscribe</a></li>
+        <li><a href="/rss.xml">RSS</a></li>
+        <li><a href={SOCIAL.github} rel="me">GitHub</a></li>
+        <li><a href={SOCIAL.linkedin} rel="me">LinkedIn</a></li>
+        <li><a href={`mailto:${SITE.email}`}>Email</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap fine">
+    <p>© {year} {SITE.name}. Views are my own and are based on public sources.</p>
+    <p><a href="/archive">Archive</a></p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-section);
+    border-top: 1px solid var(--rule);
+    padding-block: 2.5rem 2rem;
+    font-family: var(--sans);
+    font-size: 0.86rem;
+    color: var(--ink-2);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+
+  .name a {
+    text-decoration: none;
+  }
+
+  .sub {
+    margin-top: 0.4rem;
+    max-width: 34rem;
+    color: var(--ink-3);
+  }
+
+  nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  .fine {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+    font-size: 0.78rem;
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 700px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

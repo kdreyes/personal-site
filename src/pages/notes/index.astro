@@ -1,0 +1,39 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import WorkList from '~/components/WorkList.astro';
+import { getEntries, toWorkItem } from '~/lib/content';
+
+const items = (await getEntries('notes')).map(toWorkItem);
+---
+
+<BaseLayout
+  title="Field Notes"
+  description="Shorter observations from Katrina Delos Reyes: papers worth reading, unexpected data, emerging contradictions, and hypotheses worth tracking."
+>
+  <div class="wrap">
+    <header class="page-head measure">
+      <p class="kicker">The Inner Intelligence Era</p>
+      <h1>Field Notes</h1>
+      <p class="lede">
+        Shorter and less settled than essays: a paper worth reading, an unexpected data point, a contradiction, a hypothesis
+        worth tracking. Each note is dated so it can be cited and revisited.
+      </p>
+    </header>
+
+    {
+      items.length === 0 ? (
+        <p class="empty sans">No field notes published yet.</p>
+      ) : (
+        <WorkList items={items} />
+      )
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .empty {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.5rem;
+    color: var(--ink-2);
+  }
+</style>

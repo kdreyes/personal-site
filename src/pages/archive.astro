@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { formatShortDate, isoDate } from '~/lib/format';
+
+const posts = (await getCollection('archive')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Archive" description="Earlier writing by Katrina Delos Reyes, kept for the record." noindex>
+  <div class="wrap">
+    <header class="page-head measure">
+      <p class="kicker">Archive</p>
+      <h1>Earlier writing</h1>
+      <p class="lede">Posts from before this site became the home of <a href="/">The Inner Intelligence Era</a>, kept for the record.</p>
+    </header>
+    <ul role="list">
+      {
+        posts.map((p) => (
+          <li>
+            <time class="meta" datetime={isoDate(p.data.date)}>{formatShortDate(p.data.date)}</time>
+            <a href={p.data.url}>{p.data.title}</a>
+            <span class="venue sans">{p.data.venue}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: var(--measure);
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr auto;
+    gap: 1rem;
+    align-items: baseline;
+    padding-block: 0.9rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .venue {
+    font-size: 0.8rem;
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 560px) {
+    li {
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+    }
+  }
+</style>

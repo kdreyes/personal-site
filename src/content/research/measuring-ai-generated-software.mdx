@@ -1,0 +1,74 @@
+---
+title: We May Be Measuring AI-Generated Software Completely Wrong
+subtitle: What counts as trustworthy evidence when machines write the code, the tests, and the review?
+description: AI increasingly takes part on both sides of software development, generating systems and helping verify what was generated. What counts as trustworthy software assurance when implementation, tests, review, and evidence can all be produced by machines?
+date: 2026-11-01
+series: Software Is Changing First
+status: Researching
+featured: true
+topics:
+  - AI-generated software
+  - Software verification
+  - Software assurance
+  - AI code review
+  - Coding agents
+research_question: Which forms of independence actually increase confidence in AI-generated software?
+hypothesis: Verification that shares a model, prompt, or specification with the generator adds less independent evidence than its volume suggests, because the generator and the verifier can share blind spots.
+competing_hypotheses:
+  - Model diversity matters little. Most of the confidence comes from executable checks such as tests, types, and formal properties, whoever wrote them.
+  - Independence of the specification matters more than independence of the model. A second model checking against the same flawed spec adds little.
+  - Human review stays the main source of independent assurance, but only when reviewers have the time and context to disagree with the machine.
+methodology_status: In design. Literature and evidence review underway; experiment design not yet finalized.
+related:
+  - observatory/software-is-changing-first
+firewall_check: true
+updates:
+  - date: 2026-11-01
+    note: Research page opened. Question, working hypothesis, and competing hypotheses published before any results.
+---
+
+<Callout label="Working research page">
+This page tracks a project in progress. Nothing below is a finding yet. The question, hypotheses, and method are
+published up front so it's visible later how the thinking changed.
+</Callout>
+
+## Why this question
+
+Software teams have long built confidence through some form of independence: someone other than the author reviews
+the change, tests are written against a specification rather than the implementation, and separate tools look for
+different classes of defects. The point is that a second look catches what the first one missed.
+
+AI changes what "a second look" means. The same kind of system can now write the implementation, write the tests,
+review the change, and summarize the evidence for a human approver. Every artifact can look thorough. That isn't the
+same as each one being an independent check.
+
+If generation and verification share the same model, training data, prompt, or specification, their errors may be
+correlated. A large volume of passing evidence could then mean less than it appears to.
+
+## What this project investigates
+
+- **Verification provenance.** Who or what produced each piece of evidence, and from what inputs?
+- **Same-model versus cross-model review.** Does a different model add independent evidence, or does it share the
+  same blind spots?
+- **Specification independence.** Is a check independent if it derives from the same possibly flawed specification?
+- **Heterogeneous verification.** Do mixed methods (tests, static analysis, formal properties, human review) fail in
+  less correlated ways than repeated use of one method?
+- **Correlated AI failure modes.** When AI-generated code is wrong, are AI reviewers systematically likely to miss it?
+- **Human accountability.** What should a human approver be accountable for when most of the evidence in front of them
+  was machine-produced?
+
+## How I intend to approach it
+
+The method is still being designed. The plan is to:
+
+1. Review the public literature on software assurance, independent verification and validation, and recent empirical
+   work on AI code generation and AI-assisted review.
+2. Define a small, reproducible experimental setup comparing verification configurations that differ in one
+   dimension of independence at a time.
+3. Publish code, prompts, and data so the results can be checked and replicated.
+
+## Limitations
+
+This is a question, not a conclusion. Any eventual experiments will cover a narrow slice of real-world software
+development, and results from one setting may not carry over to others. All evidence will come from public sources
+or from experiments designed and published here. None of it comes from any employer's internal systems or data.

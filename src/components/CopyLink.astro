@@ -1,0 +1,43 @@
+---
+---
+
+<button type="button" class="copy-link" data-copy-link>
+  <span data-label>Copy link</span>
+</button>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-link]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const label = btn.querySelector('[data-label]');
+      const url = document.querySelector<HTMLLinkElement>('link[rel=canonical]')?.href ?? location.href;
+      try {
+        await navigator.clipboard.writeText(url);
+        if (label) label.textContent = 'Link copied';
+      } catch {
+        if (label) label.textContent = url;
+      }
+      setTimeout(() => {
+        if (label) label.textContent = 'Copy link';
+      }, 2500);
+    });
+  });
+</script>
+
+<style>
+  .copy-link {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--ink-3);
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--rule-strong);
+    text-underline-offset: 0.2em;
+  }
+
+  .copy-link:hover {
+    color: var(--ink);
+  }
+</style>

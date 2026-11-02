@@ -1,0 +1,43 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '~/layouts/ArticleLayout.astro';
+import { getEntries, toWorkItem } from '~/lib/content';
+import { mdxComponents } from '~/components/mdx';
+
+export async function getStaticPaths() {
+  const entries = await getEntries('notes');
+  return entries.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, newer: entries[i - 1], older: entries[i + 1] },
+  }));
+}
+
+const { entry, newer, older } = Astro.props;
+const { Content } = await render(entry);
+const source = entry.data.source_url;
+---
+
+<ArticleLayout
+  item={toWorkItem(entry)}
+  toc={false}
+  canonical={entry.data.canonical_url}
+  section="Field Notes"
+  next={newer && toWorkItem(newer)}
+  prev={older && toWorkItem(older)}
+>
+  <Content components={mdxComponents} />
+  {
+    source && (
+      <p class="source sans">
+        Source: <a href={source}>{new URL(source).host}</a>
+      </p>
+    )
+  }
+</ArticleLayout>
+
+<style>
+  .source {
+    font-size: 0.86rem;
+    color: var(--ink-3);
+  }
+</style>

@@ -1,0 +1,280 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import FeaturedWork from '~/components/FeaturedWork.astro';
+import WorkList from '~/components/WorkList.astro';
+import Subscribe from '~/components/Subscribe.astro';
+import { getAllWork, getFeatured, getEntries } from '~/lib/content';
+import { CATEGORIES } from '~/lib/observatory';
+import { websiteLd } from '~/lib/jsonld';
+import { SITE } from '~/site.config';
+
+const featured = await getFeatured();
+const recent = (await getAllWork()).filter((w) => w.key !== featured?.key).slice(0, 8);
+const caseStudy = (await getEntries('observatory'))[0];
+
+const QUESTIONS = [
+  'What becomes scarce when intelligence becomes abundant?',
+  'What happens to expertise?',
+  'How do people become senior if machines do the junior work?',
+  'How should organizations change?',
+  'What should people learn?',
+  'How do we establish trust when machines produce both the artifacts and the evidence?',
+  'What stays valuable about human judgment, responsibility, agency, taste, relationships, and lived experience?',
+];
+---
+
+<BaseLayout description={SITE.description} jsonLd={websiteLd()}>
+  <div class="wrap">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="kicker name">{SITE.name}</p>
+      <h1 id="hero-title">
+        <span>Software is changing first.</span>
+        <span>Humans are the bigger story.</span>
+      </h1>
+      <p class="support">
+        I write about AI, software engineering, work, and what happens to humans when intelligence becomes abundant.
+      </p>
+      <div class="era">
+        <p class="kicker">{SITE.investigation}</p>
+        <p class="sans">An ongoing investigation into AI, software, work, and the changing role of human judgment.</p>
+      </div>
+      {featured && <a class="arrow-link start" href={featured.href}>Start with the latest investigation →</a>}
+    </section>
+
+    {
+      featured && (
+        <section class="section">
+          <FeaturedWork item={featured} />
+        </section>
+      )
+    }
+
+    <section class="section era-section" aria-labelledby="era-heading">
+      <div class="section-head">
+        <h2 id="era-heading">{SITE.investigation}</h2>
+      </div>
+      <div class="era-grid">
+        <div class="prose">
+          <p>
+            Artificial intelligence is making capabilities that once took substantial human time, expertise, and effort
+            cheap and abundant. Software may be one of the first places where that change is visible at scale.
+          </p>
+          <p>
+            The interesting question is not only what AI can do. It is what happens next, to the people who do the work,
+            the organizations built around them, and the institutions built around those. These are open questions, not
+            predictions:
+          </p>
+        </div>
+        <ol class="questions" role="list">
+          {QUESTIONS.map((q) => <li>{q}</li>)}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="obs-heading">
+      <div class="section-head">
+        <h2 id="obs-heading">The Observatory</h2>
+        <a class="arrow-link" href="/observatory">About the Observatory →</a>
+      </div>
+      <p class="lede obs-lede">Tracking the transition from software outward.</p>
+      <p class="obs-body">
+        Quantitative and qualitative evidence on how AI capabilities turn into changes in behavior, work, organizations,
+        institutions, and human experience.
+      </p>
+      <dl class="cats">
+        {
+          CATEGORIES.map((c) => (
+            <div>
+              <dt>{c.name}</dt>
+              <dd>{c.question}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      {
+        caseStudy && (
+          <p class="case sans">
+            <span class="kicker">First case study · {caseStudy.data.status}</span>
+            <a href={`/observatory/${caseStudy.id}`}>{caseStudy.data.title}</a>
+          </p>
+        )
+      }
+    </section>
+
+    {
+      recent.length > 0 && (
+        <section class="section" aria-labelledby="recent-heading">
+          <div class="section-head">
+            <h2 id="recent-heading">Recent work</h2>
+          </div>
+          <WorkList items={recent} />
+        </section>
+      )
+    }
+
+    <section class="section about" aria-labelledby="about-heading">
+      <div class="section-head">
+        <h2 id="about-heading">About</h2>
+      </div>
+      <div class="prose">
+        <p>
+          I’m Katrina Delos Reyes, an engineering leader working at the intersection of software, advanced development, and
+          consequential technology.
+        </p>
+        <p>
+          Software engineering is my home base. I’m interested in what happens when increasingly capable AI changes not only
+          how we build technology, but the skills, organizations, institutions, and assumptions built around human
+          intelligence.
+        </p>
+        <p>This site is where I investigate those questions in public.</p>
+      </div>
+      <p class="more"><a class="arrow-link" href="/about">More about me →</a></p>
+    </section>
+
+    <section class="section">
+      <Subscribe id="home-subscribe" />
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: clamp(3.5rem, 2rem + 7vw, 8rem) 0;
+    max-width: 58rem;
+  }
+
+  .name {
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-size: var(--step-4);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+  }
+
+  h1 span {
+    display: block;
+  }
+
+  h1 span + span {
+    color: var(--ink-2);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .support {
+    margin-top: 1.75rem;
+    font-size: var(--step-1);
+    line-height: 1.45;
+    max-width: 34em;
+  }
+
+  .era {
+    margin-top: 2.25rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent);
+    max-width: 34rem;
+  }
+
+  .era .sans {
+    margin-top: 0.25rem;
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+
+  .start {
+    display: inline-block;
+    margin-top: 2.25rem;
+    font-size: 1rem;
+  }
+
+  .era-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem 4rem;
+  }
+
+  .questions {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: q;
+  }
+
+  .questions li {
+    counter-increment: q;
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    padding-block: 0.8rem;
+    border-top: 1px solid var(--rule);
+    font-size: 1.08rem;
+    line-height: 1.4;
+  }
+
+  .questions li::before {
+    content: counter(q, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink-3);
+    padding-top: 0.3rem;
+  }
+
+  @media (min-width: 960px) {
+    .era-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+
+  .obs-lede {
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  .obs-body {
+    margin-top: 0.6rem;
+    color: var(--ink-2);
+    max-width: 40rem;
+  }
+
+  .cats {
+    margin: 2rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 0 2.5rem;
+  }
+
+  .cats div {
+    padding-block: 0.9rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .cats dt {
+    font-weight: 600;
+  }
+
+  .cats dd {
+    margin: 0.2rem 0 0;
+    color: var(--ink-2);
+    font-size: 0.98rem;
+    line-height: 1.45;
+  }
+
+  .case {
+    margin-top: 2rem;
+    display: grid;
+    gap: 0.3rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+  }
+
+  .about .prose {
+    max-width: 38rem;
+  }
+
+  .more {
+    margin-top: 1.5rem;
+  }
+</style>

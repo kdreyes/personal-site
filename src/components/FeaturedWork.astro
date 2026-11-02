@@ -1,0 +1,76 @@
+---
+import type { WorkItem } from '~/lib/content';
+import { formatDate, isoDate } from '~/lib/format';
+import MetaLine from './MetaLine.astro';
+
+interface Props {
+  item: WorkItem;
+}
+const { item } = Astro.props;
+const when = item.updated ?? item.date;
+---
+
+<article class="featured" aria-labelledby="featured-title">
+  <p class="kicker label">Current investigation</p>
+  <MetaLine item={item} />
+  <h2 id="featured-title"><a href={item.href}>{item.title}</a></h2>
+  {item.subtitle && <p class="deck">{item.subtitle}</p>}
+  <p class="desc">{item.description}</p>
+  <p class="foot">
+    <a class="arrow-link" href={item.href}>Read the {item.collection === 'research' ? 'research' : 'essay'} →</a>
+    <span class="meta">
+      {item.updated ? 'Updated ' : ''}<time datetime={isoDate(when)}>{formatDate(when)}</time>
+    </span>
+  </p>
+</article>
+
+<style>
+  .featured {
+    border-top: 3px solid var(--ink);
+    padding-top: 1.4rem;
+  }
+
+  .label {
+    margin-bottom: 1.6rem;
+  }
+
+  h2 {
+    font-size: var(--step-3);
+    margin-top: 0.6rem;
+    max-width: 18em;
+  }
+
+  h2 a {
+    text-decoration: none;
+  }
+
+  h2 a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--accent);
+  }
+
+  .deck {
+    margin-top: 0.8rem;
+    font-size: var(--step-1);
+    color: var(--ink-2);
+    font-style: italic;
+    max-width: 34em;
+  }
+
+  .desc {
+    margin-top: 1.2rem;
+    font-size: var(--step-1);
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 36em;
+  }
+
+  .foot {
+    display: flex;
+    gap: 1.5rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-top: 1.6rem;
+  }
+</style>
